@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  mongosqld:
+    container_name: mongosqld
+    hostname: mongosqld
+    build:
+      context: .
+      args:
+        VERSION: ${VERSION}
+    image: ianblenke/mongosqld:${VERSION}
+

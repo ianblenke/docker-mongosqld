@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongosqld
+  labels:
+    app: mongosqld
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongosqld
+  template:
+    metadata:
+      labels:
+        app: mongosqld
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+      - name: mongosqld
+        env:
+        - name: MONGODB_URL
+          value: "mongodb://localhost:27017"
+        image: ianblenke/mongosql:latest
+        ports:
+        - containerPort: 3306
+        imagePullPolicy: Always
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongosqld
+spec:
+  type: ClusterIP
+  selector:
+    app: mongosqld
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306
