@@ -70,7 +70,7 @@ systemLog:
   verbosity: ${MONGODB_SYSTEMLOG_VERBOSITY:-1}
   # logAppend: false
   # logRotate: "rename"|"reopen"
-  logRotate: "${MONGODB_SYSTEMLOG_LOGROTATE:-rename}"
+  #logRotate: "${MONGODB_SYSTEMLOG_LOGROTATE:-rename}"
 
 ## Schema options
 ## These configuration options define how the mongosqld should sample your MongoDB
@@ -115,4 +115,4 @@ processManagement:
 #     maxPerConnection: 0
 EOF
 
-exec /usr/local/bin/mongosqld --config config.yaml
+/usr/local/bin/mongosqld --config config.yaml
